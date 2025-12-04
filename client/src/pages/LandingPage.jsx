@@ -51,7 +51,7 @@ function AboutSection() {
             society.
           </p>
         </div>
-        <div className='grid grid-cols-2 gap-4 w-full h-full'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full h-full'>
           <iframe
             src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3971.306961054124!2d100.4279782!3d5.5213882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304adb2ed9909595%3A0xdad6bbee44b48e2f!2sKlinik%20Pergigian%20Primodental%2C%20Kepala%20Batas%2C%20Pulau%20Pinang%20(Best%20Dental%20Clinic%20in%20Penang)!5e0!3m2!1sen!2smy!4v1764798854281!5m2!1sen!2smy'
             // width='600'
@@ -358,7 +358,7 @@ function PatientReviewsSection({ parentRef, rowVirtualizer }) {
               to='https://search.google.com/local/writereview?placeid=ChIJlZWQ2S7bSjARL460RO671to'
               target='_blank'
               rel='noopener noreferrer'
-              className='inline-flex w-fit items-center gap-2 rounded-md border border-[#dddddd] bg-white px-5 py-2 text-black mt-2'
+              className='inline-flex w-full md:w-fit items-center gap-2 rounded-md border border-[#dddddd] bg-white px-5 py-2 text-black mt-2'
             >
               <FcGoogle className='text-xl' />
               Write a Google Review
@@ -502,7 +502,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className='min-h-screen h-full bg-[#ffffff] text-[#2d2d2d] overflow-y-auto'>
+    <div className='min-h-screen bg-[#ffffff] text-[#2d2d2d]'>
       {/* HERO / INTRO */}
       <motion.header
         className='bg-[#fed400]'
