@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
-import axios from 'axios';
+// import axios from 'axios';
 import { Link } from 'react-router';
 
 import { FcGoogle } from 'react-icons/fc';
@@ -323,17 +323,95 @@ function ServicesFacilitiesSection() {
   );
 }
 
-function PatientReviewsSection({ parentRef, rowVirtualizer }) {
-  const [reviews, setReviews] = useState([]);
+function PatientReviewsSection() {
+  const reviews = [
+    {
+      author_name: 'Firdaus Azizan',
+      author_url:
+        'https://www.google.com/maps/contrib/111610745578433442771/reviews',
+      language: 'en',
+      original_language: 'en',
+      profile_photo_url:
+        'https://lh3.googleusercontent.com/a-/ALV-UjU0STIFnnbGhu-TVzXz2CNTBKGLlU1FqCPMWmQwvXSTcvBKhiB1=s128-c0x00000000-cc-rp-mo-ba2',
+      rating: 5,
+      relative_time_description: '3 weeks ago',
+      text: 'I had such a wonderful experience at PrimoDental Clinic, Kepala Batas! The whole process was super smooth and fast, I didn’t have to wait long at all before meeting the doctor. The dentist took the time to clearly explain every step of the procedure, which really helped me feel calm and confident. the doctors and staff here are incredibly friendly, caring, and professional. You can really feel that they genuinely care about their patients. After my minor surgery, they even checked in and monitored my recovery. Overall, I’m beyond satisfied with their service. If you’re looking for a dental clinic that’s efficient, gentle, and truly patient-oriented, I highly recommend PrimoDental Kepala Batas!',
+      time: 1762871598,
+      translated: false,
+    },
+    {
+      author_name: 'yana gyu',
+      author_url:
+        'https://www.google.com/maps/contrib/112520329822785686190/reviews',
+      language: 'en',
+      original_language: 'en',
+      profile_photo_url:
+        'https://lh3.googleusercontent.com/a-/ALV-UjWJPiS-6kwgRq9uSBGSaAhCSqBXy9-Mcb6kChRIqinzrY29gjbhFw=s128-c0x00000000-cc-rp-mo',
+      rating: 5,
+      relative_time_description: 'a month ago',
+      text: 'primodental clinic really impressed me! clean place, gentle doctor, and great service from the staff. 10/10 would recommend',
+      time: 1761407447,
+      translated: false,
+    },
+    {
+      author_name: 'Mohd Halil Talib',
+      author_url:
+        'https://www.google.com/maps/contrib/115271146864053248452/reviews',
+      language: 'en',
+      original_language: 'en',
+      profile_photo_url:
+        'https://lh3.googleusercontent.com/a/ACg8ocLOH_JZeR1NnZ82NKeZYZdD6uYa7OFEOxDdN_avNPlnkiMhhA=s128-c0x00000000-cc-rp-mo',
+      rating: 5,
+      relative_time_description: '3 weeks ago',
+      text: 'Service and friendliness are present at this dental clinic. The best dental workmanship and the best dental facilities that I have ever experienced. I recommend this dental clinic led by a young man with vision. May you be successful and prosper!!',
+      time: 1762943212,
+      translated: false,
+    },
+    {
+      author_name: 'usollie Othman',
+      author_url:
+        'https://www.google.com/maps/contrib/104620481035120016338/reviews',
+      language: 'en',
+      original_language: 'en',
+      profile_photo_url:
+        'https://lh3.googleusercontent.com/a/ACg8ocJFDKEbflNkN_X9DNpX0RrvS8rBeV3tZdby3g4LZcAgsvevipY=s128-c0x00000000-cc-rp-mo',
+      rating: 5,
+      relative_time_description: '5 months ago',
+      text:
+        '🌟 5-Star Review for PrimoDental 🌟\n' +
+        'I had my dental treatment today at PrimoDental, and I’m genuinely impressed by the outstanding service! From the moment I walked in, the staff were welcoming and professional.\n' +
+        '\n' +
+        'The dentist was gentle, thorough, and explained every step clearly, which made me feel completely at ease. The nurse was kind, attentive, and supportive throughout the whole process. Together, they made what could have been a stressful experience feel smooth and comfortable.\n' +
+        '\n' +
+        'I truly appreciate the care, patience, and expertise shown today. Highly recommended to anyone looking for top-quality dental care with a personal touch. Thank you, PrimoDental team — I’ll definitely be coming back and will spread the word! 🦷😊👏',
+      time: 1750708255,
+      translated: false,
+    },
+    {
+      author_name: 'Marya',
+      author_url:
+        'https://www.google.com/maps/contrib/112479199553835179269/reviews',
+      language: 'en',
+      original_language: 'en',
+      profile_photo_url:
+        'https://lh3.googleusercontent.com/a-/ALV-UjU_wJIdHssSCe3GcG7SJFi9qgOvFv_1yrguatVhz0maIUeIeQ4=s128-c0x00000000-cc-rp-mo',
+      rating: 5,
+      relative_time_description: '5 months ago',
+      text: 'Came here for my routine scaling and braces adjustment while balik kampung to Penang. I’ve been to a few dentists in KL, but this clinic is honestly one of the best I’ve been to. Dr. Adib is super passionate and really knows his stuff. The staff were also super friendly and made the whole experience comfortable. You can tell they really take good care of your teeth. Highly recommend if you’re in the area!',
+      time: 1751764101,
+      translated: false,
+    },
+  ];
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:5000/api/reviews')
-      .then((res) => {
-        setReviews(res.data.reviews || []);
-      })
-      .catch((err) => console.error(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:5000/api/reviews')
+  //     .then((res) => {
+  //       setReviews(res.data.reviews || []);
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => console.error(err));
+  // }, []);
 
   return (
     <motion.section
@@ -487,24 +565,33 @@ const SECTIONS = [
 ];
 
 export default function LandingPage() {
-  const reviewsParentRef = useRef(null);
-  const sectionParentRef = useRef(null);
+  const heroRef = useRef(null);
   const [showFixedHeader, setShowFixedHeader] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      // show fixed header after user scrolls 120px
-      setShowFixedHeader(window.scrollY > 120);
-    };
+    const hero = heroRef.current;
+    if (!hero) return;
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // When hero is NOT visible → show fixed header
+        setShowFixedHeader(!entry.isIntersecting);
+      },
+      {
+        root: null, // viewport
+        threshold: 0.1, // 0.1 = 10% visible
+      }
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div className='min-h-screen bg-[#ffffff] text-[#2d2d2d]'>
       {/* HERO / INTRO */}
       <motion.header
+        ref={heroRef}
         className='bg-[#fed400]'
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -646,7 +733,6 @@ export default function LandingPage() {
                     Google Maps
                   </p>
                 </Link>
-                {/* https://maps.app.goo.gl/YW9hmPjz6vmsETqh6?g_st=ipc */}
               </PopoverPanel>
             </Popover>
           </div>
@@ -654,7 +740,7 @@ export default function LandingPage() {
       </motion.div>
 
       {/* Virtualized main sections including Patient Reviews */}
-      <div ref={sectionParentRef} className=' border-t border-[#2d2d2d]/10'>
+      <div className=' border-t border-[#2d2d2d]/10'>
         {SECTIONS.map((section) => (
           <motion.div
             key={section.id}
