@@ -27,7 +27,7 @@ function AboutSection() {
             About Us
           </h2>
           <p className='mt-2 text-[13px] text-[#2d2d2d]/70 sm:text-base'>
-            Get to know Klinik Pergigian Primodental.
+            Get to know Klinik Pergigian Primodental
           </p>
         </div>
         <div className='space-y-3 text-[13px] leading-relaxed text-[#2d2d2d]/80 sm:text-base'>
