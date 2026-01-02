@@ -452,7 +452,7 @@ function PatientReviewsSection() {
       viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
-      <div className='mx-auto max-w-5xl px-4 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-400'>
+      <div className='mx-auto max-w-5xl px-4 py-4 motion-safe:animate-fade-up motion-safe:animation-delay-400'>
         <div className='mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
           <div>
             <h2 className='text-xl font-semibold text-[#2d2d2d] sm:text-2xl'>
