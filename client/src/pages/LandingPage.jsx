@@ -2,14 +2,15 @@ import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 // import axios from 'axios';
+import dayjs from 'dayjs';
 import { Link } from 'react-router';
 
 import { FcGoogle } from 'react-icons/fc';
 import { FaWhatsapp, FaWaze, FaMapMarkedAlt } from 'react-icons/fa';
 import { CiLocationOn } from 'react-icons/ci';
 
-import DepanKlinik from '../assets/depanprimo.jpeg';
-import Adib from '../assets/adib.jpeg';
+import DepanKlinik from '../assets/depanprimo.png';
+import Adib from '../assets/dradib.png';
 const LogoPrimo = '/logoprimo.png';
 
 function AboutSection() {
@@ -18,7 +19,7 @@ function AboutSection() {
       className=' bg-[#ffffff]'
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <div className='mx-auto flex max-w-5xl flex-col gap-8 px-4 py-8 md:py-10 motion-safe:animate-fade-up'>
@@ -71,7 +72,7 @@ function VisionMissionSection() {
       className='bg-[linear-gradient(to_right,#fde68a_0%,#fde68a_50%,#ffffff_50%,#ffffff_100%)]'
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.5, ease: 'easeOut', delay: 0.05 }}
     >
       <div className='mx-auto max-w-5xl px-4 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-100 bg-[#fde68a] rounded-2xl'>
@@ -128,56 +129,58 @@ function CoreValuesSection() {
   return (
     <motion.section
       className='bg-[linear-gradient(to_right,#ffffff_0%,#ffffff_50%,#0051BA_50%,#0051BA_100%)]'
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      initial={{ opacity: 0, x: 100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
     >
       <div className='mx-auto max-w-5xl px-8 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-150 bg-[#0051BA] rounded-4xl'>
         <div className='flex flex-col gap-6 md:items-start'>
           <div className='md:w-1/3'>
             <h2 className='text-xl font-semibold text-white sm:text-2xl'>
-              Core Values
+              Our Core Values
             </h2>
             <p className='mt-2 text-[13px] text-white/70 sm:text-base'>
-              Principles that guide how we care for you.
+              The foundation of exceptional dental care.
             </p>
           </div>
           <div className='grid flex-1 grid-cols-1 gap-4 text-[13px] sm:grid-cols-2 sm:text-base'>
             <div className='rounded-2xl bg-[#ffffff] p-4 shadow-sm ring-1 ring-[#2d2d2d]/5'>
               <h3 className='text-sm font-semibold text-[#2d2d2d] sm:text-base'>
-                Integrity
+                Clinical Integrity
               </h3>
               <p className='mt-2 text-[#2d2d2d]/75'>
-                Honest recommendations, transparent treatment plans, and ethical
-                clinical decisions in every case.
-              </p>
-            </div>
-            <div className='rounded-2xl bg-[#ffffff] p-4 shadow-sm ring-1 ring-[#2d2d2d]/5'>
-              <h3 className='text-sm font-semibold text-[#2d2d2d] sm:text-base'>
-                Compassion
-              </h3>
-              <p className='mt-2 text-[#2d2d2d]/75'>
-                A gentle, respectful approach that prioritizes comfort and
-                patient understanding.
-              </p>
-            </div>
-            <div className='rounded-2xl bg-[#ffffff] p-4 shadow-sm ring-1 ring-[#2d2d2d]/5'>
-              <h3 className='text-sm font-semibold text-[#2d2d2d] sm:text-base'>
-                Excellence
-              </h3>
-              <p className='mt-2 text-[#2d2d2d]/75'>
-                Continuous improvement in skills, technology, and safety
+                Evidence-based diagnosis, transparent treatment plans, and
+                ethical clinical practice aligned with dental professional
                 standards.
               </p>
             </div>
             <div className='rounded-2xl bg-[#ffffff] p-4 shadow-sm ring-1 ring-[#2d2d2d]/5'>
               <h3 className='text-sm font-semibold text-[#2d2d2d] sm:text-base'>
-                Teamwork
+                Patient-Centered Care
               </h3>
               <p className='mt-2 text-[#2d2d2d]/75'>
-                Collaborative care between doctors, staff, and patients to
-                achieve the best outcomes.
+                Gentle chairside manner, thorough patient education, and
+                personalized treatment tailored to individual oral health needs.
+              </p>
+            </div>
+            <div className='rounded-2xl bg-[#ffffff] p-4 shadow-sm ring-1 ring-[#2d2d2d]/5'>
+              <h3 className='text-sm font-semibold text-[#2d2d2d] sm:text-base'>
+                Clinical Excellence
+              </h3>
+              <p className='mt-2 text-[#2d2d2d]/75'>
+                Commitment to continuing dental education, adoption of modern
+                techniques, and adherence to strict infection control protocols.
+              </p>
+            </div>
+            <div className='rounded-2xl bg-[#ffffff] p-4 shadow-sm ring-1 ring-[#2d2d2d]/5'>
+              <h3 className='text-sm font-semibold text-[#2d2d2d] sm:text-base'>
+                Collaborative Practice
+              </h3>
+              <p className='mt-2 text-[#2d2d2d]/75'>
+                Integrated teamwork between dental professionals and patients to
+                ensure optimal oral health outcomes and long-term dental
+                wellness.
               </p>
             </div>
           </div>
@@ -191,9 +194,9 @@ function PrincipalDoctorSection() {
   return (
     <motion.section
       className='bg-[linear-gradient(to_right,#fed400_0%,#fed400_50%,#ffffff_50%,#ffffff_100%)]'
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      initial={{ opacity: 0, x: -100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.5, ease: 'easeOut', delay: 0.15 }}
     >
       <div className='mx-auto max-w-5xl px-4 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-200 bg-[#fed400] rounded-4xl'>
@@ -265,7 +268,7 @@ function ServicesFacilitiesSection() {
       className='border-b border-[#2d2d2d]/10 bg-[#ffffff]'
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
     >
       <div className='mx-auto max-w-5xl px-4 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-300'>
@@ -340,6 +343,20 @@ function PatientReviewsSection() {
       translated: false,
     },
     {
+      author_name: 'NAZREEN SALINA AHMAD SABRI',
+      author_url:
+        'https://www.google.com/maps/contrib/115435760815644478440/reviews',
+      language: 'en',
+      original_language: 'en',
+      profile_photo_url:
+        'https://lh3.googleusercontent.com/a-/ALV-UjWWPgr-n9WEGxdmhMNhTknUZu_piVpgmjbvp99Nhe4d4yweUay7=s128-c0x00000000-cc-rp-mo',
+      rating: 5,
+      relative_time_description: '4 weeks ago',
+      text: 'the staffs are very friendly and talkative , they explained everything so well , and the doctor also very polite and hardworking , and also willing to explain all the procedures and the consequences to the patient . a very good attitude from them . for the surrounding , it is so comfortable with the alunan ayatul quran that will make patient feel more calm . the price for all the operation also affordable for everyone . overall this is a good experience for us and we will come again ⭐️⭐️⭐️⭐️',
+      time: 1764940259,
+      translated: false,
+    },
+    {
       author_name: 'yana gyu',
       author_url:
         'https://www.google.com/maps/contrib/112520329822785686190/reviews',
@@ -365,6 +382,20 @@ function PatientReviewsSection() {
       relative_time_description: '3 weeks ago',
       text: 'Service and friendliness are present at this dental clinic. The best dental workmanship and the best dental facilities that I have ever experienced. I recommend this dental clinic led by a young man with vision. May you be successful and prosper!!',
       time: 1762943212,
+      translated: false,
+    },
+    {
+      author_name: 'Salehah Sally',
+      author_url:
+        'https://www.google.com/maps/contrib/115045147657570888292/reviews',
+      language: 'en',
+      original_language: 'en',
+      profile_photo_url:
+        'https://lh3.googleusercontent.com/a-/ALV-UjXunfQ2uiuLLa6RWoGK6SyyY23kw4KoQ72ZD2E7eytOZD-J6Yt9=s128-c0x00000000-cc-rp-mo',
+      rating: 5,
+      relative_time_description: '4 months ago',
+      text: "Primodental clinic is the best. Thank you to the doctor for providing the best service and also to the staff ,you are very   customer friendly. I am very satisfied with the doctor's work which is neat and satisfactory. The doctor is also very friendly and always gives clear explanations. Thank you very much .you all the best👍👍",
+      time: 1756733088,
       translated: false,
     },
     {
@@ -407,7 +438,7 @@ function PatientReviewsSection() {
   //   axios
   //     .get('http://localhost:5000/api/reviews')
   //     .then((res) => {
-  //       setReviews(res.data.reviews || []);
+  //       // setReviews(res.data.reviews || []);
   //       console.log(res.data);
   //     })
   //     .catch((err) => console.error(err));
@@ -418,7 +449,7 @@ function PatientReviewsSection() {
       className=' bg-[#ffffff]'
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.5, ease: 'easeOut', delay: 0.25 }}
     >
       <div className='mx-auto max-w-5xl px-4 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-400'>
@@ -458,15 +489,16 @@ function PatientReviewsSection() {
                 </svg>
               ))}
             </div>
-            <span className='text-[12px] text-[#2d2d2d]/60'>
+            {/* <span className='text-[12px] text-[#2d2d2d]/60'>
               {reviews.length} reviews
-            </span>
+            </span> */}
           </div>
         </div>
 
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 '>
           {reviews
-            .filter((_, idx) => idx < 4)
+            .sort((a, b) => b.time - a.time)
+            .filter((_, idx) => idx < 6)
             .map((r, idx) => (
               <article
                 key={`${r.author_name}-${idx}`}
@@ -485,7 +517,7 @@ function PatientReviewsSection() {
                       {r.author_name}
                     </p>
                     <p className='text-[12px] text-[#2d2d2d]/60'>
-                      {r.relative_time_description}
+                      {dayjs.unix(r.time).format('D MMM YYYY')}
                     </p>
                   </div>
                 </div>
@@ -596,6 +628,8 @@ export default function LandingPage() {
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.2 }}
       >
         <div className='mx-auto flex max-w-5xl flex-col gap-2 md:gap-8 px-4 pb-10 pt-8 md:flex-row-reverse md:items-center md:pt-12'>
           {/* Desktop hero image */}
@@ -746,7 +780,7 @@ export default function LandingPage() {
             key={section.id}
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
             {section.render()}
