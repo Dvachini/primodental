@@ -20,7 +20,7 @@ function AboutSection() {
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto flex max-w-5xl flex-col gap-8 px-4 py-8 md:py-10 motion-safe:animate-fade-up'>
         <div className='md:w-1/3'>
@@ -73,7 +73,7 @@ function VisionMissionSection() {
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: 'easeOut', delay: 0.05 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto max-w-5xl px-4 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-100 bg-[#fde68a] rounded-2xl'>
         <div className='flex flex-col gap-6 md:flex-row'>
@@ -129,10 +129,10 @@ function CoreValuesSection() {
   return (
     <motion.section
       className='bg-[linear-gradient(to_right,#ffffff_0%,#ffffff_50%,#0051BA_50%,#0051BA_100%)]'
-      initial={{ opacity: 0, x: 100 }}
+      initial={{ opacity: 0, x: 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: false, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto max-w-5xl px-8 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-150 bg-[#0051BA] rounded-4xl'>
         <div className='flex flex-col gap-6 md:items-start'>
@@ -194,10 +194,10 @@ function PrincipalDoctorSection() {
   return (
     <motion.section
       className='bg-[linear-gradient(to_right,#fed400_0%,#fed400_50%,#ffffff_50%,#ffffff_100%)]'
-      initial={{ opacity: 0, x: -100 }}
+      initial={{ opacity: 0, x: -50 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: false, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: 'easeOut', delay: 0.15 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto max-w-5xl px-4 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-200 bg-[#fed400] rounded-4xl'>
         <div className='flex flex-col gap-6 md:flex-row md:items-start'>
@@ -269,7 +269,7 @@ function ServicesFacilitiesSection() {
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto max-w-5xl px-4 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-300'>
         <div className='flex flex-col gap-6 md:items-start'>
@@ -450,7 +450,7 @@ function PatientReviewsSection() {
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: 'easeOut', delay: 0.25 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto max-w-5xl px-4 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-400'>
         <div className='mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
@@ -780,8 +780,8 @@ export default function LandingPage() {
             key={section.id}
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             {section.render()}
           </motion.div>
