@@ -1,13 +1,23 @@
 import { useRef, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 // import axios from 'axios';
 import dayjs from 'dayjs';
 import { Link } from 'react-router';
 
 import { FcGoogle } from 'react-icons/fc';
-import { FaWhatsapp, FaWaze, FaMapMarkedAlt } from 'react-icons/fa';
+import {
+  FaWhatsapp,
+  FaWaze,
+  FaMapMarkedAlt,
+  FaTooth,
+  FaChild,
+  FaTeeth,
+  FaTeethOpen,
+  FaCrown,
+} from 'react-icons/fa';
 import { CiLocationOn } from 'react-icons/ci';
+import { MdAutoAwesome } from 'react-icons/md';
 
 import DepanKlinik from '../assets/depanprimo.png';
 import Adib from '../assets/dradib.png';
@@ -33,23 +43,21 @@ function AboutSection() {
         </div>
         <div className='space-y-3 text-[13px] leading-relaxed text-[#2d2d2d]/80 sm:text-base'>
           <p>
-            Primodental was established on 1st of March 2025. The establishment
-            of this clinic is driven to deliver comprehensive dental services to
-            public and private clients.
+            Primodental was established on 1st of March 2025. We opened this
+            clinic to provide a wide range of dental services for everyone —
+            whether you&apos;re a walk-in patient or a corporate client.
           </p>
           <p>
-            We provide high-quality and patient-friendly dental treatment
-            services to the local community. Equipped with modern facilities,
-            this clinic is committed to offer evidence-based treatment, using
-            the latest technology and an approach that focuses on the comfort
-            and individual needs of patients.
+            We provide high-quality, friendly dental care to the local
+            community. With modern facilities and the latest technology, we
+            focus on proven treatments that put your comfort and personal needs
+            first.
           </p>
           <p>
-            In accordance to the campaign of Ministry of Health Malaysia (KKM),
-            we believe that a healthy smile is the key to self-confidence and a
-            better quality of life. Thus, Primodental is presented as a trusted
-            and easily accessible oral healthcare partner for all levels of
-            society.
+            In line with the goals of the Ministry of Health Malaysia (KKM), we
+            believe a healthy smile is the key to confidence and a better
+            quality of life. Primodental is here to be your trusted and
+            easy-to-reach dental care partner — for everyone.
           </p>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full h-full'>
@@ -101,20 +109,20 @@ function VisionMissionSection() {
               </h3>
               <ul className='mt-1 list-disc space-y-1 pl-4'>
                 <li>
-                  To deliver comprehensive dental services tailored to the needs
-                  of our patients.
+                  To provide a full range of dental services that fit your
+                  needs.
                 </li>
                 <li>
-                  To maintain the highest standards of clinical practice using
-                  evidence-based dentistry.
+                  To keep to the highest standards of care using proven dental
+                  methods.
                 </li>
                 <li>
                   To provide affordable treatments without compromising on
                   quality.
                 </li>
                 <li>
-                  To promote oral health awareness and preventive care within
-                  the community.
+                  To spread awareness about good dental habits and early
+                  prevention in the community.
                 </li>
               </ul>
             </div>
@@ -150,9 +158,8 @@ function CoreValuesSection() {
                 Clinical Integrity
               </h3>
               <p className='mt-2 text-[#2d2d2d]/75'>
-                Evidence-based diagnosis, transparent treatment plans, and
-                ethical clinical practice aligned with dental professional
-                standards.
+                Honest and thorough check-ups, clear treatment plans, and
+                ethical care that follows proper dental guidelines.
               </p>
             </div>
             <div className='rounded-2xl bg-[#ffffff] p-4 shadow-sm ring-1 ring-[#2d2d2d]/5'>
@@ -160,8 +167,8 @@ function CoreValuesSection() {
                 Patient-Centered Care
               </h3>
               <p className='mt-2 text-[#2d2d2d]/75'>
-                Gentle chairside manner, thorough patient education, and
-                personalized treatment tailored to individual oral health needs.
+                A gentle, caring approach with clear explanations about your
+                dental health, and treatment plans made just for you.
               </p>
             </div>
             <div className='rounded-2xl bg-[#ffffff] p-4 shadow-sm ring-1 ring-[#2d2d2d]/5'>
@@ -169,8 +176,8 @@ function CoreValuesSection() {
                 Clinical Excellence
               </h3>
               <p className='mt-2 text-[#2d2d2d]/75'>
-                Commitment to continuing dental education, adoption of modern
-                techniques, and adherence to strict infection control protocols.
+                Always learning and improving, using modern methods, and
+                following strict cleanliness and safety standards.
               </p>
             </div>
             <div className='rounded-2xl bg-[#ffffff] p-4 shadow-sm ring-1 ring-[#2d2d2d]/5'>
@@ -178,9 +185,8 @@ function CoreValuesSection() {
                 Collaborative Practice
               </h3>
               <p className='mt-2 text-[#2d2d2d]/75'>
-                Integrated teamwork between dental professionals and patients to
-                ensure optimal oral health outcomes and long-term dental
-                wellness.
+                Our team works closely together — and with you — to make sure
+                you get the best results for your long-term dental health.
               </p>
             </div>
           </div>
@@ -216,8 +222,8 @@ function PrincipalDoctorSection() {
                 Principal Doctor &amp; Founder
               </p>
               <p className='mt-2'>
-                Dedicated to precise, patient-first care using modern dental
-                technology to deliver safe, high-quality outcomes.
+                Focused on putting patients first, using modern dental tools to
+                deliver safe and high-quality results.
               </p>
             </div>
           </div>
@@ -262,6 +268,235 @@ function PrincipalDoctorSection() {
   }
 }
 
+const SERVICES_DATA = [
+  {
+    title: 'Filling, Scaling & Polish',
+    description:
+      'Fillings help fix broken or decayed teeth, while scaling is a deep cleaning to remove plaque and tartar buildup for healthier gums and teeth.',
+    icon: FaTooth,
+    iconBg: '#DBEAFE',
+    iconColor: '#0051BA',
+  },
+  {
+    title: 'Kids Dental Care',
+    description:
+      'The earlier children start regular dental checkups, the healthier their teeth will be for life. Early visits help prevent cavities and keep little smiles bright.',
+    icon: FaChild,
+    iconBg: '#FCE7F3',
+    iconColor: '#DB2777',
+  },
+  {
+    title: 'Root Canal Treatment',
+    description:
+      'A root canal relieves tooth pain caused by infection deep inside the tooth. The dentist carefully removes the infection and seals the tooth to prevent future problems.',
+    icon: FaTooth,
+    iconBg: '#FEE2E2',
+    iconColor: '#DC2626',
+  },
+  {
+    title: 'Veneer',
+    description:
+      'Veneers are thin, custom-made shells placed on the front of your teeth to improve their shape, colour, or size — a simple way to get the smile you want.',
+    icon: FaTeeth,
+    iconBg: '#CFFAFE',
+    iconColor: '#0891B2',
+  },
+  {
+    title: 'Scaling & Gum Treatment',
+    description:
+      'Good gum health matters at every age. As we get older, our gums can become more prone to infection, so regular cleaning and gum care are important.',
+    icon: FaTooth,
+    iconBg: '#DCFCE7',
+    iconColor: '#16A34A',
+  },
+  // {
+  //   title: 'Dental Implants',
+  //   description:
+  //     'Dental implants are strong, permanent replacements for missing teeth. They look and feel like natural teeth, giving you back your confident smile.',
+  //   icon: FaTooth,
+  //   iconBg: '#E0E7FF',
+  //   iconColor: '#4F46E5',
+  // },
+  {
+    title: 'Braces',
+    description:
+      'Braces help straighten crooked or misaligned teeth, improving both the look and function of your smile over time.',
+    icon: FaTeethOpen,
+    iconBg: '#FFEDD5',
+    iconColor: '#EA580C',
+  },
+  {
+    title: 'Teeth Whitening',
+    description:
+      'Teeth whitening is one of the easiest ways to brighten your smile, especially if your teeth are stained from coffee, tea, smoking, or certain foods.',
+    icon: MdAutoAwesome,
+    iconBg: '#FEF9C3',
+    iconColor: '#CA8A04',
+  },
+  {
+    title: 'Gum Disease & Treatment',
+    description:
+      'Gum disease causes swelling, soreness, or bleeding in the gums. Regular screening is a key part of your routine dental checkup to catch it early.',
+    icon: FaTooth,
+    iconBg: '#FFE4E6',
+    iconColor: '#E11D48',
+  },
+  {
+    title: 'Crowns & Bridges',
+    description:
+      'Crowns and bridges are used to repair or replace damaged teeth so you can eat, speak, and smile normally again.',
+    icon: FaCrown,
+    iconBg: '#FEF3C7',
+    iconColor: '#D97706',
+  },
+  {
+    title: 'Tooth Extraction',
+    description:
+      'Tooth removal is a quick and common procedure done with numbing so you feel little to no pain. Our dentist will guide you through every step.',
+    icon: FaTooth,
+    iconBg: '#F3F4F6',
+    iconColor: '#4B5563',
+  },
+  {
+    title: 'Wisdom Tooth Removal',
+    description:
+      'Our dentists are gentle and experienced, making sure you feel minimal discomfort while we carefully remove your wisdom tooth.',
+    icon: FaTooth,
+    iconBg: '#EDE9FE',
+    iconColor: '#7C3AED',
+  },
+];
+
+function OurServicesSection() {
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+  const [startX, setStartX] = useState(0);
+  const [endX, setEndX] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  });
+
+  useEffect(() => {
+    const updatePositions = () => {
+      if (!trackRef.current) return;
+      const cards = trackRef.current.children;
+      if (!cards.length) return;
+      const viewportWidth = window.innerWidth;
+      const firstCardWidth = cards[0].offsetWidth;
+      const lastCard = cards[cards.length - 1];
+      const lastCardLeft = lastCard.offsetLeft;
+      const lastCardWidth = lastCard.offsetWidth;
+      // Start the first card at 1/4 from the left
+      setStartX(viewportWidth / 4 - firstCardWidth / 2);
+      // Center the last card on screen
+      setEndX(-lastCardLeft + (viewportWidth - lastCardWidth) / 2);
+    };
+    updatePositions();
+    window.addEventListener('resize', updatePositions);
+    return () => window.removeEventListener('resize', updatePositions);
+  }, []);
+
+  const x = useTransform(scrollYProgress, [0, 1], [startX, endX]);
+
+  const scrollByCard = (direction) => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const scrollPerCard = section.offsetHeight / SERVICES_DATA.length;
+    window.scrollBy({ top: direction * scrollPerCard, behavior: 'smooth' });
+  };
+
+  return (
+    <section
+      ref={sectionRef}
+      className='relative bg-[#faf7f2]'
+      style={{ height: `${SERVICES_DATA.length * 40}vh` }}
+    >
+      <div className='sticky top-0 h-screen overflow-hidden flex flex-col justify-center'>
+        <div className='mx-auto max-w-5xl px-4 mb-8 flex items-center justify-between'>
+          <h2 className='text-2xl font-semibold text-[#0051BA] sm:text-3xl'>
+            Our Best Services To Our Patients.
+          </h2>
+        </div>
+        <motion.div ref={trackRef} className='flex gap-6 px-20' style={{ x }}>
+          {SERVICES_DATA.map((service) => (
+            <div
+              key={service.title}
+              className='flex w-72 shrink-0 flex-col rounded-2xl bg-white shadow-sm ring-1 ring-[#2d2d2d]/5 overflow-hidden'
+            >
+              <div
+                className='flex h-32 w-full items-center justify-center'
+                style={{ backgroundColor: service.iconBg }}
+              >
+                <service.icon
+                  className='text-5xl'
+                  style={{ color: service.iconColor }}
+                />
+              </div>
+              <div className='flex flex-1 flex-col p-5'>
+                <h3 className='text-lg font-bold text-[#0051BA]'>
+                  {service.title}
+                </h3>
+                <p className='mt-3 text-[13px] leading-relaxed text-[#2d2d2d]/75 sm:text-sm'>
+                  {service.description}
+                </p>
+              </div>
+              <div className='px-5 pb-5'>
+                <Link
+                  to='https://wa.me/601158858921?text=Hai%2C%20saya%20ada%20baca%20servis%20ditawarkan%20di%20website%20Klinik%20Pergigian%20Primodental.%0ABoleh%20bantu%20saya%3F'
+                  rel='noopener noreferrer'
+                  className='inline-flex items-center rounded-full bg-[#fed400]/40 px-5 py-2 text-[13px] font-medium text-[#2d2d2d] transition hover:bg-[#fed400]/60'
+                >
+                  Ask Us
+                </Link>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+        <div className='flex items-center justify-center gap-2 mt-7'>
+          <button
+            onClick={() => scrollByCard(-1)}
+            className='flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-[#2d2d2d]/10 transition hover:bg-[#fed400]/30'
+            aria-label='Scroll left'
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 20 20'
+              fill='currentColor'
+              className='h-5 w-5 text-[#0051BA]'
+            >
+              <path
+                fillRule='evenodd'
+                d='M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z'
+                clipRule='evenodd'
+              />
+            </svg>
+          </button>
+          <button
+            onClick={() => scrollByCard(1)}
+            className='flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-[#2d2d2d]/10 transition hover:bg-[#fed400]/30'
+            aria-label='Scroll right'
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 20 20'
+              fill='currentColor'
+              className='h-5 w-5 text-[#0051BA]'
+            >
+              <path
+                fillRule='evenodd'
+                d='M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z'
+                clipRule='evenodd'
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ServicesFacilitiesSection() {
   return (
     <motion.section
@@ -275,46 +510,24 @@ function ServicesFacilitiesSection() {
         <div className='flex flex-col gap-6 md:items-start'>
           <div className='md:w-1/3'>
             <h2 className='text-xl font-semibold text-[#2d2d2d] sm:text-2xl'>
-              Services &amp; Facilities
+              Facilities &amp; Equipment
             </h2>
             <p className='mt-2 text-[13px] text-[#2d2d2d]/70 sm:text-base'>
-              Modern treatment options in a comfortable setting.
+              Modern tools in a comfortable setting.
             </p>
           </div>
           <div className='grid flex-1 grid-cols-1 gap-4 text-[13px] sm:grid-cols-2 sm:text-base'>
             <div className='rounded-2xl bg-[#ffffff] p-4 shadow-sm ring-1 ring-[#2d2d2d]/5'>
               <h3 className='text-sm font-semibold text-[#2d2d2d] sm:text-base'>
-                Services Offered
-              </h3>
-              <ul className='mt-2 list-disc space-y-1 pl-4 text-[#2d2d2d]/75'>
-                <li>General Dentistry (Scaling, Filling, Extraction)</li>
-                <li>
-                  Preventive Dentistry (Fluoride, Fissure Sealant, Oral Health
-                  Education)
-                </li>
-                <li>Restorative Dentistry (Crowns, Bridges, Dentures)</li>
-                <li>
-                  Cosmetic Dentistry (Teeth Whitening, Veneers) &amp;
-                  Orthodontics (Braces &amp; Aligners)
-                </li>
-                <li>
-                  Minor Oral Surgery &amp; Pediatric Dentistry (Children&apos;s
-                  Dental Care)
-                </li>
-                <li>Emergency Dental Care</li>
-              </ul>
-            </div>
-            <div className='rounded-2xl bg-[#ffffff] p-4 shadow-sm ring-1 ring-[#2d2d2d]/5'>
-              <h3 className='text-sm font-semibold text-[#2d2d2d] sm:text-base'>
-                Facilities &amp; Equipment
+                What We Have
               </h3>
               <ul className='mt-2 list-disc space-y-1 pl-4 text-[#2d2d2d]/75'>
                 <li>Fully equipped dental treatment rooms</li>
-                <li>Digital X-Ray system (Intraoral)</li>
-                <li>Autoclave sterilization system</li>
-                <li>Comfortable patient waiting area</li>
+                <li>Digital X-Ray system</li>
+                <li>Advanced sterilization system</li>
+                <li>Comfortable waiting area</li>
                 <li>
-                  Modern dental instruments adhering to infection control
+                  Modern dental tools that meet strict hygiene and safety
                   standards
                 </li>
               </ul>
@@ -432,6 +645,20 @@ function PatientReviewsSection() {
       time: 1751764101,
       translated: false,
     },
+    // {
+    //   author_name: 'uzbmmzunp94',
+    //   author_url:
+    //     'https://www.google.com/maps/contrib/104535206343037357216/reviews',
+    //   language: 'en',
+    //   original_language: 'en',
+    //   profile_photo_url:
+    //     'https://lh3.googleusercontent.com/a-/ALV-UjWdmPRbyqXKUMmPYFQhs6Q1AqplkwJcNMciHBcfjd0XnTQqSG0=s128-c0x00000000-cc-rp-mo-ba5',
+    //   rating: 5,
+    //   relative_time_description: '2 months ago',
+    //   text: 'Easy communication through WhatsApp. Dr. Adib gave a detailed explanation and outlined all options during the checkup. The X-ray procedure was smooth, and the tooth extraction was quick and painless. The waiting area is comfortable and there is ample parking. Recommended.',
+    //   time: 1769418684,
+    //   translated: false,
+    // },
   ];
 
   // useEffect(() => {
@@ -588,6 +815,7 @@ const SECTIONS = [
   { id: 'about', render: () => <AboutSection /> },
   // { id: 'vision-mission', render: () => <VisionMissionSection /> },
   { id: 'core-values', render: () => <CoreValuesSection /> },
+  { id: 'our-services', render: () => <OurServicesSection /> },
   { id: 'patient-reviews', render: () => <PatientReviewsSection /> },
   { id: 'principal-doctor', render: () => <PrincipalDoctorSection /> },
   {
@@ -612,7 +840,7 @@ export default function LandingPage() {
       {
         root: null, // viewport
         threshold: 0.1, // 0.1 = 10% visible
-      }
+      },
     );
 
     observer.observe(hero);
@@ -654,17 +882,16 @@ export default function LandingPage() {
               </span>
             </h1>
             <p className='max-w-xl leading-relaxed text-[#2d2d2d]/80'>
-              Your smile is a signature of confidence, and at our clinic, we
-              elevate dental care to an experience of precision, comfort, and
-              refinement. Merging cutting-edge technology with personalized
-              attention, we deliver exceptional results in an environment
-              designed for calm, discretion, and sophistication. Excellence
-              isn't just our standard—it's our promise.
+              Your smile says a lot about you, and we&apos;re here to help you
+              feel confident about it. At our clinic, we combine the latest
+              technology with personal, caring attention to give you the best
+              dental experience — in a calm and comfortable setting. Great care
+              isn&apos;t just what we aim for — it&apos;s what we promise.
             </p>
 
             <div className='flex gap-3 pt-2 flex-row sm:items-center'>
               <Link
-                to='http://www.wasap.my/601158858921'
+                to='https://wa.me/601158858921?text=Hai%2C%20saya%20ada%20baca%20servis%20ditawarkan%20di%20website%20Klinik%20Pergigian%20Primodental.%0ABoleh%20bantu%20saya%3F'
                 rel='noopener noreferrer'
                 className='inline-flex items-center justify-center rounded-full bg-[#0051BA] px-5 py-2.5 text-[13px] font-medium text-[#ffffff] shadow-sm transition hover:bg-black'
               >
@@ -730,7 +957,7 @@ export default function LandingPage() {
           </div>
           <div className='flex flex-row space-x-2'>
             <Link
-              to='http://www.wasap.my/601158858921'
+              to='https://wa.me/601158858921?text=Hai%2C%20saya%20ada%20baca%20servis%20ditawarkan%20di%20website%20Klinik%20Pergigian%20Primodental.%0ABoleh%20bantu%20saya%3F'
               rel='noopener noreferrer'
               className='inline-flex items-center justify-center rounded-full bg-[#0051BA] px-1.5 md:px-4 py-1.5 text-[12px] font-medium text-white shadow-sm hover:bg-black'
             >
