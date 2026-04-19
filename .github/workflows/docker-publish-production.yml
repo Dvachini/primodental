@@ -13,6 +13,9 @@ jobs:
       - name: 🧾 Checkout source
         uses: actions/checkout@v4
 
+      - name: 📁 Inject client .env
+        run: echo "${{ secrets.CLIENT_ENV }}" > ./client/.env
+
       - name: 📁 Inject .env file
         run: echo "${{ secrets.PRODUCTION_ENV }}" > .env
 
