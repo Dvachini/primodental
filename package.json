@@ -6,9 +6,7 @@
     "client": "cd client && bun run dev",
     "dev-server": "bun --env-file .env --watch server.js",
     "dev": "conc -n \"CLIENT,API\" -c \"cyan,magenta,yellow\" \"npm:client\" \"npm:dev-server\"",
-    "build": "bun run build-client",
     "build-client": "cd client && bun run build",
-    "prestart": "bun run build",
     "start": "NODE_ENV=production bun --env-file .env server.js"
   },
   "dependencies": {
