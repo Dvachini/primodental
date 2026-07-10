@@ -2,6 +2,7 @@ import express from 'express';
 import helmet from 'helmet';
 import compression from 'compression';
 import path from 'path';
+import fs from 'fs';
 import axios from 'axios';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -10,6 +11,8 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const DIST_PATH = path.join(process.cwd(), 'dist');
+const INDEX_PATH = path.join(DIST_PATH, 'index.html');
 
 app.use(compression());
 app.use(cors());
@@ -19,13 +22,13 @@ app.use(
     crossOriginResourcePolicy: { policy: 'cross-origin' },
     strictTransportSecurity: false,
     xPoweredBy: false,
-  })
+  }),
 );
 
 app.use((req, res, next) => {
   res.setHeader(
     'Content-Security-Policy',
-    "img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com https://lh3.googleusercontent.com;"
+    "img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com https://lh3.googleusercontent.com;",
   );
   next();
 });
@@ -43,7 +46,7 @@ app.get('/api/reviews', async (req, res) => {
           fields: 'name,rating,reviews',
           key: process.env.GOOGLE_API_KEY,
         },
-      }
+      },
     );
 
     return res.json(response.data.result);
@@ -53,11 +56,21 @@ app.get('/api/reviews', async (req, res) => {
   }
 });
 
-app.use(express.static(path.join(process.cwd(), 'dist')));
+if (!fs.existsSync(INDEX_PATH)) {
+  console.warn(
+    '[app] dist/index.html is missing. Run `npm run build` before starting production.',
+  );
+}
 
-app.use('/', (req, res, next) => {
-  if (req.method !== 'GET') return next();
-  res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+app.use(express.static(DIST_PATH));
+
+app.get(/.*/, (req, res, next) => {
+  if (req.path.startsWith('/api')) return next();
+
+  // Do not rewrite requests for static files; let express return 404 instead.
+  if (path.extname(req.path)) return next();
+
+  return res.sendFile(INDEX_PATH);
 });
 
 try {
@@ -65,10 +78,10 @@ try {
     console.log(
       `[app] primodental is running on port ${PORT} | Deploy mode: ${
         process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
-      }`
+      }`,
     );
   });
 } catch (error) {
-  logger.error(`[app] Error: ${error.message}`);
+  console.error(`[app] Error: ${error.message}`);
   process.exit(1);
 }
