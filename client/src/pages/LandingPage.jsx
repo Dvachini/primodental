@@ -448,7 +448,7 @@ function OurServicesSection() {
                   rel='noopener noreferrer'
                   className='inline-flex items-center rounded-full bg-[#fed400]/40 px-5 py-2 text-[13px] font-medium text-[#2d2d2d] transition hover:bg-[#fed400]/60'
                 >
-                  Ask Us
+                  Ask Us Any
                 </Link>
               </div>
             </div>
