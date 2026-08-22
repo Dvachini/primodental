@@ -4,7 +4,6 @@ import compression from 'compression';
 import path from 'path';
 import fs from 'fs';
 import axios from 'axios';
-import cors from 'cors';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -15,23 +14,62 @@ const DIST_PATH = path.join(process.cwd(), 'dist');
 const INDEX_PATH = path.join(DIST_PATH, 'index.html');
 
 app.use(compression());
-app.use(cors());
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-    crossOriginResourcePolicy: { policy: 'cross-origin' },
-    strictTransportSecurity: false,
-    xPoweredBy: false,
-  }),
-);
 
+// Same-origin SPA — no cross-origin API consumers, so no permissive CORS needed.
+// (Removes the previous wildcard `cors()` which set Access-Control-Allow-Origin: *)
+
+// Security headers — tuned for securityheaders.com A+ rating.
+const csp = {
+  useDefaults: false,
+  directives: {
+    defaultSrc: ["'self'"],
+    baseUri: ["'self'"],
+    fontSrc: ["'self'", 'https:', 'data:'],
+    formAction: ["'self'"],
+    frameAncestors: ["'self'"],
+    // Google Maps embed iframe on the landing page
+    frameSrc: [
+      "'self'",
+      'https://www.google.com',
+      'https://maps.google.com',
+    ],
+    // Google Maps embeds/images used on the landing page
+    imgSrc: [
+      "'self'",
+      'data:',
+      'https://maps.gstatic.com',
+      'https://maps.googleapis.com',
+      'https://lh3.googleusercontent.com',
+    ],
+    objectSrc: ["'none'"],
+    scriptSrc: ["'self'"],
+    scriptSrcAttr: ["'none'"],
+    styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
+    connectSrc: ["'self'", 'https://maps.googleapis.com'],
+    upgradeInsecureRequests: [],
+  },
+};
+
+// Permissions-Policy: helmet 8 doesn't ship one — deny all unused browser features.
 app.use((req, res, next) => {
   res.setHeader(
-    'Content-Security-Policy',
-    "img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com https://lh3.googleusercontent.com;",
+    'Permissions-Policy',
+    'accelerometer=(), autoplay=(), camera=(), cross-origin-isolated=(), display-capture=(), encrypted-media=(), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), interest-cohort=()'
   );
   next();
 });
+
+app.use(
+  helmet({
+    contentSecurityPolicy: csp,
+    crossOriginResourcePolicy: { policy: 'same-origin' },
+    strictTransportSecurity: {
+      maxAge: 63072000,
+      includeSubDomains: true,
+      preload: true,
+    },
+  }),
+);
 
 app.use(express.json());
 
