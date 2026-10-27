@@ -84,15 +84,16 @@ app.get(/.*/, (req, res, next) => {
   return res.sendFile(INDEX_PATH);
 });
 
-try {
-  app.listen(PORT, () => {
-    console.log(
-      `[app] primodental is running on port ${PORT} | Deploy mode: ${
-        process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
-      }`,
-    );
-  });
-} catch (error) {
-  console.error(`[app] Error: ${error.message}`);
-  process.exit(1);
-}
+// Express 5 passes listen errors (e.g. EADDRINUSE) to the callback; they are never thrown.
+app.listen(PORT, (error) => {
+  if (error) {
+    console.error(`[app] Error: ${error.message}`);
+    process.exit(1);
+  }
+
+  console.log(
+    `[app] primodental is running on port ${PORT} | Deploy mode: ${
+      process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
+    }`,
+  );
+});
