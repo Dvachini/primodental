@@ -16,9 +16,6 @@ jobs:
       - name: 📁 Inject client .env
         run: echo "${{ secrets.CLIENT_ENV }}" > ./client/.env
 
-      - name: 📁 Inject .env file
-        run: echo "${{ secrets.PRODUCTION_ENV }}" > .env
-
       - name: 🔑 Docker Login
         uses: docker/login-action@v3
         with:
@@ -30,11 +27,20 @@ jobs:
         with:
           context: .
           push: true
-          tags: dvachini/primodental:production
+          # :production is what the host runs; the sha tag keeps every release for rollback
+          tags: |
+            dvachini/primodental:production
+            dvachini/primodental:${{ github.sha }}
           cache-from: type=registry,ref=dvachini/primodental:production
           cache-to: type=inline
           build-args: |
             NODE_ENV=production
+
+      # Written after the image build so the server secrets never enter the build context
+      - name: 📁 Inject .env file
+        env:
+          PRODUCTION_ENV: ${{ secrets.PRODUCTION_ENV }}
+        run: printf '%s\n' "$PRODUCTION_ENV" > .env
 
       - name: 📤 Upload .env to server
         uses: appleboy/scp-action@v0.1.7
