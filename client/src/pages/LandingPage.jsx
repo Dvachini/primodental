@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
-// import axios from 'axios';
 import dayjs from 'dayjs';
 import { Link } from 'react-router';
 
@@ -661,22 +660,13 @@ function PatientReviewsSection() {
     // },
   ];
 
-  // useEffect(() => {
-  //   axios
-  //     .get('http://localhost:5000/api/reviews')
-  //     .then((res) => {
-  //       // setReviews(res.data.reviews || []);
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => console.error(err));
-  // }, []);
 
   return (
     <motion.section
       className=' bg-[#ffffff]'
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto max-w-5xl px-4 py-4 motion-safe:animate-fade-up motion-safe:animation-delay-400'>
