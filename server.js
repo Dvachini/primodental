@@ -3,10 +3,6 @@ import helmet from 'helmet';
 import compression from 'compression';
 import path from 'path';
 import fs from 'fs';
-import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -45,7 +41,7 @@ const csp = {
     scriptSrc: ["'self'"],
     scriptSrcAttr: ["'none'"],
     styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
-    connectSrc: ["'self'", 'https://maps.googleapis.com'],
+    connectSrc: ["'self'"],
     upgradeInsecureRequests: [],
   },
 };
@@ -71,29 +67,6 @@ app.use(
   }),
 );
 
-app.use(express.json());
-
-// Google Reviews API proxy
-app.get('/api/reviews', async (req, res) => {
-  try {
-    const response = await axios.get(
-      'https://maps.googleapis.com/maps/api/place/details/json',
-      {
-        params: {
-          place_id: 'ChIJlZWQ2S7bSjARL460RO671to',
-          fields: 'name,rating,reviews',
-          key: process.env.GOOGLE_API_KEY,
-        },
-      },
-    );
-
-    return res.json(response.data.result);
-  } catch (err) {
-    console.error('[api] Failed to fetch Google reviews', err?.message || err);
-    return res.status(500).json({ error: 'Failed to fetch reviews' });
-  }
-});
-
 if (!fs.existsSync(INDEX_PATH)) {
   console.warn(
     '[app] dist/index.html is missing. Run `npm run build` before starting production.',
@@ -111,15 +84,16 @@ app.get(/.*/, (req, res, next) => {
   return res.sendFile(INDEX_PATH);
 });
 
-try {
-  app.listen(PORT, () => {
-    console.log(
-      `[app] primodental is running on port ${PORT} | Deploy mode: ${
-        process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
-      }`,
-    );
-  });
-} catch (error) {
-  console.error(`[app] Error: ${error.message}`);
-  process.exit(1);
-}
+// Express 5 passes listen errors (e.g. EADDRINUSE) to the callback; they are never thrown.
+app.listen(PORT, (error) => {
+  if (error) {
+    console.error(`[app] Error: ${error.message}`);
+    process.exit(1);
+  }
+
+  console.log(
+    `[app] primodental is running on port ${PORT} | Deploy mode: ${
+      process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
+    }`,
+  );
+});

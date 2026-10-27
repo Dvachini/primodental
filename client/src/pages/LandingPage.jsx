@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
-// import axios from 'axios';
 import dayjs from 'dayjs';
 import { Link } from 'react-router';
 
@@ -19,8 +18,8 @@ import {
 import { CiLocationOn } from 'react-icons/ci';
 import { MdAutoAwesome } from 'react-icons/md';
 
-import DepanKlinik from '../assets/depanprimo.png';
-import Adib from '../assets/dradib.png';
+import DepanKlinik from '../assets/depanprimo.webp';
+import Adib from '../assets/dradib.webp';
 const LogoPrimo = '/logoprimo.png';
 
 function AboutSection() {
@@ -29,7 +28,7 @@ function AboutSection() {
       className=' bg-[#ffffff]'
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto flex max-w-5xl flex-col gap-8 px-4 py-8 md:py-10 motion-safe:animate-fade-up'>
@@ -63,11 +62,20 @@ function AboutSection() {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full h-full'>
           <iframe
             src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3971.306961054124!2d100.4279782!3d5.5213882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304adb2ed9909595%3A0xdad6bbee44b48e2f!2sKlinik%20Pergigian%20Primodental%2C%20Kepala%20Batas%2C%20Pulau%20Pinang%20(Best%20Dental%20Clinic%20in%20Penang)!5e0!3m2!1sen!2smy!4v1764798854281!5m2!1sen!2smy'
+            title='Google Maps location of Klinik Pergigian Primodental'
+            loading='lazy'
             // width='600'
             // height='450'
             className='rounded-2xl w-full h-full'
           ></iframe>
-          <img src={DepanKlinik} className='rounded-2xl w-full h-full' />
+          <img
+            src={DepanKlinik}
+            alt='Front of Klinik Pergigian Primodental'
+            width='1600'
+            height='2143'
+            loading='lazy'
+            className='rounded-2xl w-full h-full'
+          />
         </div>
       </div>
     </motion.section>
@@ -80,7 +88,7 @@ function VisionMissionSection() {
       className='bg-[linear-gradient(to_right,#fde68a_0%,#fde68a_50%,#ffffff_50%,#ffffff_100%)]'
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto max-w-5xl px-4 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-100 bg-[#fde68a] rounded-2xl'>
@@ -139,7 +147,7 @@ function CoreValuesSection() {
       className='bg-[linear-gradient(to_right,#ffffff_0%,#ffffff_50%,#0051BA_50%,#0051BA_100%)]'
       initial={{ opacity: 0, x: 50 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto max-w-5xl px-8 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-150 bg-[#0051BA] rounded-4xl'>
@@ -202,7 +210,7 @@ function PrincipalDoctorSection() {
       className='bg-[linear-gradient(to_right,#fed400_0%,#fed400_50%,#ffffff_50%,#ffffff_100%)]'
       initial={{ opacity: 0, x: -50 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto max-w-5xl px-4 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-200 bg-[#fed400] rounded-4xl'>
@@ -234,6 +242,9 @@ function PrincipalDoctorSection() {
               <img
                 src={Adib}
                 alt='Dr. Adib Amjad'
+                width='800'
+                height='1075'
+                loading='lazy'
                 className='rounded-2xl shadow-sm ring-1 ring-[#2d2d2d]/10'
               />
             </div>
@@ -503,7 +514,7 @@ function ServicesFacilitiesSection() {
       className='border-b border-[#2d2d2d]/10 bg-[#ffffff]'
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto max-w-5xl px-4 py-8 md:py-10 motion-safe:animate-fade-up motion-safe:animation-delay-300'>
@@ -661,22 +672,13 @@ function PatientReviewsSection() {
     // },
   ];
 
-  // useEffect(() => {
-  //   axios
-  //     .get('http://localhost:5000/api/reviews')
-  //     .then((res) => {
-  //       // setReviews(res.data.reviews || []);
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => console.error(err));
-  // }, []);
 
   return (
     <motion.section
       className=' bg-[#ffffff]'
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className='mx-auto max-w-5xl px-4 py-4 motion-safe:animate-fade-up motion-safe:animation-delay-400'>
@@ -857,7 +859,7 @@ export default function LandingPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.2 }}
       >
         <div className='mx-auto flex max-w-5xl flex-col gap-2 md:gap-8 px-4 pb-10 pt-8 md:flex-row-reverse md:items-center md:pt-12'>
           {/* Desktop hero image */}
@@ -865,6 +867,9 @@ export default function LandingPage() {
             <img
               src={LogoPrimo}
               alt='Klinik Primo Dental Logo'
+              width='500'
+              height='500'
+              fetchPriority='high'
               className='h-20 md:h-full w-20 md:w-full object-contain object-center'
             />
           </div>
@@ -1007,7 +1012,7 @@ export default function LandingPage() {
             key={section.id}
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: false, amount: 0.1 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             {section.render()}
