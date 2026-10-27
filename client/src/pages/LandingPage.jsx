@@ -18,8 +18,8 @@ import {
 import { CiLocationOn } from 'react-icons/ci';
 import { MdAutoAwesome } from 'react-icons/md';
 
-import DepanKlinik from '../assets/depanprimo.png';
-import Adib from '../assets/dradib.png';
+import DepanKlinik from '../assets/depanprimo.webp';
+import Adib from '../assets/dradib.webp';
 const LogoPrimo = '/logoprimo.png';
 
 function AboutSection() {
@@ -62,11 +62,20 @@ function AboutSection() {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full h-full'>
           <iframe
             src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3971.306961054124!2d100.4279782!3d5.5213882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304adb2ed9909595%3A0xdad6bbee44b48e2f!2sKlinik%20Pergigian%20Primodental%2C%20Kepala%20Batas%2C%20Pulau%20Pinang%20(Best%20Dental%20Clinic%20in%20Penang)!5e0!3m2!1sen!2smy!4v1764798854281!5m2!1sen!2smy'
+            title='Google Maps location of Klinik Pergigian Primodental'
+            loading='lazy'
             // width='600'
             // height='450'
             className='rounded-2xl w-full h-full'
           ></iframe>
-          <img src={DepanKlinik} className='rounded-2xl w-full h-full' />
+          <img
+            src={DepanKlinik}
+            alt='Front of Klinik Pergigian Primodental'
+            width='1600'
+            height='2143'
+            loading='lazy'
+            className='rounded-2xl w-full h-full'
+          />
         </div>
       </div>
     </motion.section>
@@ -233,6 +242,9 @@ function PrincipalDoctorSection() {
               <img
                 src={Adib}
                 alt='Dr. Adib Amjad'
+                width='800'
+                height='1075'
+                loading='lazy'
                 className='rounded-2xl shadow-sm ring-1 ring-[#2d2d2d]/10'
               />
             </div>
@@ -855,6 +867,9 @@ export default function LandingPage() {
             <img
               src={LogoPrimo}
               alt='Klinik Primo Dental Logo'
+              width='500'
+              height='500'
+              fetchPriority='high'
               className='h-20 md:h-full w-20 md:w-full object-contain object-center'
             />
           </div>
